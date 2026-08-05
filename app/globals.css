@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ZEIGEN '26 — Japanese Samurai Design System
+   Calm. Elegant. Cinematic. Premium.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* === Color Tokens === */
+    --parchment:   #FAF8F4;
+    --cream:       #F5F1EA;
+    --warm-white:  #FFFFFF;
+    --light-pink:  #F8D7DA;
+    --sakura:      #F5B7C4;
+    --muted-red:   #B0413E;
+    --crimson:     #8B2E2C;
+    --ink:         #2B2B2B;
+    --ink-light:   #4A4A4A;
+    --ink-muted:   #6B6B6B;
+    --ink-subtle:  #9A9A9A;
+    --gold:        #C6A664;
+    --gold-light:  #D4B87A;
+    --gold-pale:   #EDD9A8;
+
+    /* === Spacing === */
+    --section-px: clamp(1.25rem, 5vw, 5rem);
+    --section-py: clamp(4rem, 8vw, 7rem);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  body {
+    background-color: var(--parchment);
+    color: var(--ink);
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    /* Subtle rice paper warmth */
+    background-image:
+      radial-gradient(ellipse at 15% 40%, rgba(245, 183, 196, 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 20%, rgba(198, 166, 100, 0.05) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 90%, rgba(245, 241, 234, 0.4)  0%, transparent 60%);
+  }
+
+  ::selection {
+    background: rgba(198, 166, 100, 0.22);
+    color: var(--ink);
+  }
+
+  /* Headings default to serif */
+  h1, h2, h3, h4 {
+    font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+    font-feature-settings: "kern" 1, "liga" 1, "swsh" 1;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold), var(--muted-red));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+/* Paper-textured card — the core card style */
+.washi-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(43, 43, 43, 0.10);
+  border-radius: 16px;
+  box-shadow:
+    0 2px 8px  rgba(43,  43,  43, 0.05),
+    0 8px 30px rgba(198, 166, 100, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
+}
+
+.washi-card:hover {
+  box-shadow:
+    0 4px 16px rgba(43,  43,  43, 0.08),
+    0 16px 45px rgba(198, 166, 100, 0.13);
+  border-color: rgba(198, 166, 100, 0.28);
+  transform: translateY(-3px);
+}
+
+/* Ink divider line */
+.ink-divider {
+  width: 48px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--gold), var(--muted-red));
+  border-radius: 2px;
+  margin: 1rem auto;
+}
+
+/* Section headings — the gold rule beneath */
+.section-heading {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--muted-red));
+  margin-top: 12px;
+  border-radius: 2px;
+}
+
+.section-heading.centered::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Primary CTA button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--muted-red);
+  border: 1px solid var(--crimson);
+  box-shadow: 0 4px 18px rgba(176, 65, 62, 0.3);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--crimson);
+  box-shadow: 0 6px 25px rgba(176, 65, 62, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Secondary outline button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1.5px solid rgba(43, 43, 43, 0.25);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--muted-red);
+  background: rgba(198, 166, 100, 0.07);
+  transform: translateY(-2px);
+}
+
+/* Red seal stamp badge */
+.seal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-red);
+  border: 1px solid rgba(176, 65, 62, 0.35);
+  background: rgba(176, 65, 62, 0.06);
+}
+
+/* Gold label */
+.gold-label {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Ink text — dark, elegant */
+.ink-text {
+  color: var(--ink);
+  font-family: var(--font-cormorant), serif;
+}
+
+/* Hide scrollbar for carousels */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================================
+   KEYFRAMES — Subtle & Organic
+   ============================================================ */
+
+/* Very slow drifting clouds */
+@keyframes drift-cloud-1 {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-120vw); }
+}
+@keyframes drift-cloud-2 {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-140vw); }
+}
+
+/* Birds flying silhouette */
+@keyframes fly-bird {
+  0%   { transform: translateX(-5vw) translateY(0); }
+  100% { transform: translateX(110vw) translateY(-40px); }
+}
+
+/* Soft sunlight breathing pulse */
+@keyframes sun-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%       { opacity: 0.65; transform: scale(1.04); }
+}
+
+/* Gentle bounce — scroll cue */
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* Ink reveal — for loading screen circle */
+@keyframes ink-circle {
+  from { stroke-dashoffset: 565; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Slow float */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Petal sway side to side */
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%       { transform: rotate(3deg); }
+}
+
+/* Progress bar */
+@keyframes loading-bar {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Sunlight ray slow sweep */
+@keyframes sun-ray {
+  0%   { opacity: 0.08; transform: rotate(0deg); }
+  50%  { opacity: 0.16; transform: rotate(2deg); }
+  100% { opacity: 0.08; transform: rotate(0deg); }
+}
+
+/* ============================================================
+   CLOUD UTILITY CLASSES
+   ============================================================ */
+.cloud-1 { animation: drift-cloud-1 90s linear infinite; }
+.cloud-2 { animation: drift-cloud-2 120s linear infinite; }
+.cloud-3 { animation: drift-cloud-1 75s linear infinite reverse; }
+
+/* ============================================================
+   SECTION TRANSITIONS
+   ============================================================ */
+.section-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   BAMBOO TIMELINE (ScheduleSection)
+   ============================================================ */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-node {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--parchment);
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-node.highlight {
+  width: 16px; height: 16px;
+  background: var(--muted-red);
+  border-color: var(--muted-red);
+  box-shadow: 0 0 0 4px rgba(176, 65, 62, 0.15);
+}
+
+/* ============================================================
+   GLASS NAVBAR
+   ============================================================ */
+.navbar-glass {
+  background: rgba(250, 248, 244, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(198, 166, 100, 0.18);
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+.scroll-progress-bar {
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--muted-red));
+  transform-origin: left;
+}
+
+/* ============================================================
+   MEDIA QUERIES
+   ============================================================ */
+@media (max-width: 768px) {
+  .section-heading { letter-spacing: -0.01em; }
+}

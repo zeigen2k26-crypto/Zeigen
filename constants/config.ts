@@ -20,7 +20,7 @@ export const SYMPOSIUM_CONFIG = {
   coordinators: {
     convener: "Dr. A. V. Ram Prasad",
     coConvener: "Dr. A. Askarunisa",
-    faculty: ["Dr.M.Pravin Kumar", "Mrs.G.Rajeswari"],
+    faculty: ["Dr.D.Pravin Kumar", "Mrs.G.Rajeswari"],
     facultyCo: ["Mr.A.Alagar", "Ms.R.Nivethitha", "Mrs.N.Nazmunisha"],
     student: ["C.Inbasekaran", "Shahana R", "Priya Dharshini S H", "Suriya Vijay MB", "Reshmi NRJ", "Jayabalajivel R"]
   },

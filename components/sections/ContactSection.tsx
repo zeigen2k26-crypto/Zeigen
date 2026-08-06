@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 import { SYMPOSIUM_CONFIG } from "@/constants/config";
 import { triggerSamuraiCutAnimation, handleRegisterClick } from "@/utils/samuraiAnimation";
 
@@ -108,7 +108,6 @@ export default function ContactSection() {
               <div className="flex gap-3">
                 {[
                   { href: SYMPOSIUM_CONFIG.socials.instagram, icon: FaInstagram, label: "Instagram" },
-                  { href: SYMPOSIUM_CONFIG.socials.linkedin,  icon: FaLinkedinIn,  label: "LinkedIn" },
                 ].map(({ href, icon: Icon, label }) => (
                   <a
                     key={label}

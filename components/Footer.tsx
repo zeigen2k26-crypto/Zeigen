@@ -2,14 +2,11 @@
 
 import React from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { FaInstagram, FaLinkedinIn, FaGithub, FaYoutube } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 import { SYMPOSIUM_CONFIG } from "@/constants/config";
 
 const SOCIALS = [
   { href: SYMPOSIUM_CONFIG.socials.instagram, icon: FaInstagram, label: "Instagram" },
-  { href: SYMPOSIUM_CONFIG.socials.linkedin,  icon: FaLinkedinIn, label: "LinkedIn" },
-  { href: SYMPOSIUM_CONFIG.socials.github,    icon: FaGithub,    label: "GitHub" },
-  { href: SYMPOSIUM_CONFIG.socials.youtube,   icon: FaYoutube,   label: "YouTube" },
 ];
 
 // Cherry blossom branch SVG divider

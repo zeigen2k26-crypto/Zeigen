@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "ACE KLNCE",
     "Technical Symposium Madurai",
     "National Symposium",
-    "Paperwands",
+    "Paper Wands",
     "Breaking Bid",
   ],
   authors: [{ name: "ACE Web Team - KLNCE" }],

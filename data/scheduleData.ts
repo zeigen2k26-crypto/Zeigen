@@ -32,7 +32,7 @@ export const SCHEDULE_DATA: ScheduleSlot[] = [
     id: "slot-3",
     time: "10:30 AM - 01:00 PM",
     title: "Technical Events (Simultaneous Track)",
-    description: "Paperwands (Paper Presentation in Seminar Hall A) & Breaking Bid (Code Debugging in Lab 3). Participants choose 1 Technical event.",
+    description: "Paper Wands (Paper Presentation in Seminar Hall A) & Breaking Bid (Code Debugging in Lab 3). Participants choose 1 Technical event.",
     category: "Technical",
     venue: "Seminar Hall A & CSE Lab 3",
     isHighlight: true

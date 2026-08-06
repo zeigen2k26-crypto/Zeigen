@@ -12,32 +12,12 @@ export interface Speaker {
 export const SPEAKERS_DATA: Speaker[] = [
   {
     id: "sp-1",
-    name: "Dr. Ananya Roy",
-    role: "Chief AI Architect",
-    company: "Neural Mind Systems",
-    topic: "Neuromorphic Computing & Brain-Computer Interfaces",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
-    tag: "Neuromorphic AI",
-    bio: "Pioneer in spiking neural network hardware architectures with over 15 US patents."
-  },
-  {
-    id: "sp-2",
-    name: "Vikramaditya Sharma",
-    role: "Head of Quantum Systems",
-    company: "Vercel Labs / HyperGrid",
-    topic: "Real-Time Neural Edge Infrastructure & WebGL Engines",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
-    tag: "Next-Gen Web Infrastructure",
-    bio: "Specialist in zero-latency edge compute pipelines and interactive 3D WebGL rendering."
-  },
-  {
-    id: "sp-3",
-    name: "Dr. Marcus Vance",
-    role: "Lead Neuro-AI Researcher",
-    company: "Cortex Cognitive Lab",
-    topic: "Synthetic Synapses: Merging Deep Learning with Biological Neural Signals",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
-    tag: "Cognitive AI",
-    bio: "Leading interdisciplinary studies on bio-hybrid computing and automated neural decoding."
+    name: "Gowri Manoharan",
+    role: "BI & Data Warehousing Specialist",
+    company: "14+ Years Expertise in Data Engineering & Cloud Solutions",
+    topic: "Business Intelligence, ETL & Cloud-Based Data Solutions",
+    image: "/speakers/gowri-manoharan.png",
+    tag: "Keynote Speaker",
+    bio: "Gowri Manoharan is an experienced Business Intelligence and Data Warehousing professional with 14+ years of expertise in data engineering, ETL development, reporting, and cloud-based data solutions. She specializes in SQL Server, SSIS, SSRS, Azure Data Factory, and Azure Databricks, and has successfully delivered data transformation and analytics projects across banking, insurance, telecommunications, and energy sectors. With a strong blend of technical expertise and leadership experience, she is recognized for driving business value through data-driven solutions and continuous innovation."
   }
 ];

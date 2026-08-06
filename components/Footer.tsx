@@ -136,17 +136,6 @@ export default function Footer() {
           <p style={{ fontSize: "0.72rem", color: "var(--ink-subtle)", fontFamily: "var(--font-inter), sans-serif" }}>
             © {SYMPOSIUM_CONFIG.year} {SYMPOSIUM_CONFIG.association}. All rights reserved.
           </p>
-          <p
-            style={{
-              fontSize: "0.72rem",
-              color: "var(--ink-muted)",
-              fontFamily: "var(--font-cormorant), serif",
-              fontStyle: "italic",
-              letterSpacing: "0.04em",
-            }}
-          >
-            Made with ❤️ by ACE Web Team
-          </p>
           <div className="flex items-center gap-3">
             {SOCIALS.map(({ href, icon: Icon, label }) => (
               <a

@@ -19,7 +19,7 @@ export const EVENTS_DATA: EventItem[] = [
   // Technical Events
   {
     id: "paperwands",
-    title: "Paperwands",
+    title: "Paper Wands",
     category: "Technical",
     shortDesc: "National Level Research & Technical Paper Presentation on Next-Gen Cyber & AI Systems.",
     fullDesc: "Cast your intellectual magic spell! Present pioneering research papers covering Artificial Intelligence, Neural Interfaces, Machine Learning, Cloud Systems, and Cyber Security to an expert panel.",

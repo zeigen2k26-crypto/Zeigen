@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, Trophy, Users, Clock, MapPin, ChevronRight, Info } from "lucide-react";
+import { ExternalLink, Users, Clock, MapPin, Info } from "lucide-react";
 import { EVENTS_DATA, type EventItem } from "@/data/eventsData";
 import { SYMPOSIUM_CONFIG } from "@/constants/config";
-import { triggerSamuraiCutAnimation, handleRegisterClick } from "@/utils/samuraiAnimation";
+import { handleRegisterClick } from "@/utils/samuraiAnimation";
 
 type Filter = "All" | "Technical" | "Non-Technical";
 
@@ -15,10 +15,10 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-40px" },
-  transition: { duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] as [number,number,number,number] },
+  transition: { duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
 });
 
-function EventCard({ event, onOpen }: { event: EventItem; onOpen: () => void }) {
+function EventCard({ event }: { event: EventItem }) {
   const isTech = event.category === "Technical";
   return (
     <motion.article
@@ -27,173 +27,91 @@ function EventCard({ event, onOpen }: { event: EventItem; onOpen: () => void }) 
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      onClick={onOpen}
-      className="washi-card p-7 cursor-pointer group flex flex-col gap-5"
-      role="button"
-      tabIndex={0}
-      onKeyDown={e => e.key === "Enter" && onOpen()}
-      aria-label={`View details for ${event.title}`}
+      className="washi-card p-6 sm:p-8 flex flex-col justify-between gap-6"
     >
-      {/* Category badge */}
-      <div className="flex items-center justify-between">
-        <span
-          className="seal-badge"
+      <div className="flex flex-col gap-4">
+        {/* Header & Category Badge */}
+        <div className="flex items-center justify-between">
+          <span
+            className="seal-badge"
+            style={{
+              color: isTech ? "var(--muted-red)" : "var(--gold)",
+              borderColor: isTech ? "rgba(176,65,62,0.35)" : "rgba(198,166,100,0.45)",
+              background: isTech ? "rgba(176,65,62,0.06)" : "rgba(198,166,100,0.08)",
+            }}
+          >
+            {event.category}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h3
           style={{
-            color: isTech ? "var(--muted-red)" : "var(--gold)",
-            borderColor: isTech ? "rgba(176,65,62,0.35)" : "rgba(198,166,100,0.45)",
-            background: isTech ? "rgba(176,65,62,0.06)" : "rgba(198,166,100,0.08)",
+            fontFamily: "var(--font-cormorant), serif",
+            fontSize: "1.6rem",
+            fontWeight: 600,
+            color: "var(--ink)",
+            letterSpacing: "0.01em",
+            lineHeight: 1.2,
           }}
         >
-          {event.category}
-        </span>
-        <ChevronRight className="w-4 h-4 text-[var(--ink-subtle)] group-hover:text-[var(--muted-red)] group-hover:translate-x-1 transition-all duration-300" />
-      </div>
+          {event.title}
+        </h3>
 
-      {/* Title */}
-      <h3
-        style={{
-          fontFamily: "var(--font-cormorant), serif",
-          fontSize: "1.35rem",
-          fontWeight: 600,
-          color: "var(--ink)",
-          letterSpacing: "0.01em",
-          lineHeight: 1.2,
-        }}
-      >
-        {event.title}
-      </h3>
+        {/* Full description */}
+        <p style={{ fontSize: "0.88rem", lineHeight: 1.7, color: "var(--ink-muted)", fontFamily: "var(--font-inter), sans-serif" }}>
+          {event.fullDesc}
+        </p>
 
-      {/* Short description */}
-      <p style={{ fontSize: "0.85rem", lineHeight: 1.7, color: "var(--ink-muted)", fontFamily: "var(--font-inter), sans-serif", flexGrow: 1 }}>
-        {event.shortDesc}
-      </p>
+        {/* Divider */}
+        <div style={{ height: "1px", background: "rgba(198,166,100,0.25)", margin: "0.25rem 0" }} />
 
-      {/* Thin rule */}
-      <div style={{ height: "1px", background: "rgba(198,166,100,0.2)" }} />
-
-      {/* Meta row */}
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-1.5" style={{ fontSize: "0.78rem", color: "var(--ink)", fontWeight: 600, fontFamily: "var(--font-inter), sans-serif" }}>
-          <Users className="w-3.5 h-3.5 shrink-0" style={{ color: "var(--gold)" }} />
-          {event.teamSize}
-        </div>
-        <div className="flex items-center gap-1.5" style={{ fontSize: "0.78rem", color: "var(--ink-muted)", fontFamily: "var(--font-inter), sans-serif" }}>
-          <Clock className="w-3.5 h-3.5 shrink-0" style={{ color: "var(--ink-subtle)" }} />
-          {event.time}
-        </div>
-      </div>
-    </motion.article>
-  );
-}
-
-function EventModal({ event, onClose }: { event: EventItem; onClose: () => void }) {
-  const isTech = event.category === "Technical";
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-[rgba(43,43,43,0.35)] backdrop-blur-sm" onClick={onClose} />
-
-      {/* Sheet */}
-      <motion.div
-        className="relative w-full sm:max-w-lg max-h-[90vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl"
-        style={{ background: "var(--parchment)", boxShadow: "0 -10px 60px rgba(43,43,43,0.15)" }}
-        initial={{ y: 60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 60, opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as [number,number,number,number] }}
-      >
-        {/* Drag handle (mobile) */}
-        <div className="flex justify-center pt-4 pb-2 sm:hidden">
-          <div style={{ width: "36px", height: "4px", borderRadius: "2px", background: "rgba(43,43,43,0.15)" }} />
-        </div>
-
-        <div className="p-7">
-          {/* Header */}
-          <div className="flex items-start justify-between mb-5">
-            <div>
-              <span
-                className="seal-badge mb-2"
-                style={{
-                  color: isTech ? "var(--muted-red)" : "var(--gold)",
-                  borderColor: isTech ? "rgba(176,65,62,0.35)" : "rgba(198,166,100,0.45)",
-                  background: isTech ? "rgba(176,65,62,0.06)" : "rgba(198,166,100,0.08)",
-                }}
-              >
-                {event.category}
-              </span>
-              <h3
-                style={{
-                  fontFamily: "var(--font-cormorant), serif",
-                  fontSize: "1.7rem",
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  lineHeight: 1.15,
-                  marginTop: "0.5rem",
-                }}
-              >
-                {event.title}
-              </h3>
-            </div>
-            <button
-              onClick={onClose}
-              className="p-2 rounded-xl transition-colors ml-4 shrink-0"
-              style={{ background: "rgba(43,43,43,0.06)", color: "var(--ink-muted)" }}
-              aria-label="Close"
+        {/* Meta grid: Team size, Time, Venue */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          {[
+            { icon: Users, label: "Team Size", value: event.teamSize },
+            { icon: Clock, label: "Time", value: event.time },
+            { icon: MapPin, label: "Venue", value: event.venue },
+          ].map(({ icon: Icon, label, value }) => (
+            <div
+              key={label}
+              className="rounded-xl p-3"
+              style={{ background: "rgba(255,255,255,0.65)", border: "1px solid rgba(43,43,43,0.08)" }}
             >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Thin rule */}
-          <div style={{ height: "1px", background: "rgba(198,166,100,0.25)", marginBottom: "1.25rem" }} />
-
-          {/* Full description */}
-          <p style={{ fontSize: "0.88rem", lineHeight: 1.75, color: "var(--ink-muted)", fontFamily: "var(--font-inter), sans-serif", marginBottom: "1.5rem" }}>
-            {event.fullDesc}
-          </p>
-
-          {/* Meta grid */}
-          <div className="grid grid-cols-3 gap-2.5 mb-5">
-            {[
-              { icon: Users,  label: "Team Size",  value: event.teamSize },
-              { icon: Clock,  label: "Time",        value: event.time },
-              { icon: MapPin, label: "Venue",       value: event.venue },
-            ].map(({ icon: Icon, label, value }) => (
-              <div
-                key={label}
-                className="rounded-xl p-3"
-                style={{ background: "rgba(255,255,255,0.65)", border: "1px solid rgba(43,43,43,0.08)" }}
-              >
-                <p style={{ fontSize: "0.58rem", letterSpacing: "0.12em", color: "var(--ink-subtle)", textTransform: "uppercase", fontFamily: "var(--font-inter), sans-serif", marginBottom: "0.25rem" }}>{label}</p>
-                <div className="flex items-center gap-1">
-                  <Icon className="w-3.5 h-3.5 shrink-0" style={{ color: "var(--gold)" }} />
-                  <span style={{ fontSize: "0.76rem", fontWeight: 600, color: "var(--ink)", fontFamily: "var(--font-inter), sans-serif" }}>{value}</span>
-                </div>
+              <p style={{ fontSize: "0.58rem", letterSpacing: "0.12em", color: "var(--ink-subtle)", textTransform: "uppercase", fontFamily: "var(--font-inter), sans-serif", marginBottom: "0.25rem" }}>
+                {label}
+              </p>
+              <div className="flex items-center gap-1.5">
+                <Icon className="w-3.5 h-3.5 shrink-0" style={{ color: "var(--gold)" }} />
+                <span style={{ fontSize: "0.76rem", fontWeight: 600, color: "var(--ink)", fontFamily: "var(--font-inter), sans-serif" }}>
+                  {value}
+                </span>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
-          {/* Rules */}
-          <h4 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "1rem", fontWeight: 600, color: "var(--ink)", marginBottom: "0.75rem", letterSpacing: "0.04em" }}>Rules</h4>
-          <ul className="flex flex-col gap-2 mb-5">
-            {event.rules.map((r, i) => (
-              <li key={i} className="flex items-start gap-2.5" style={{ fontSize: "0.82rem", color: "var(--ink-muted)", fontFamily: "var(--font-inter), sans-serif", lineHeight: 1.6 }}>
+        {/* Rules */}
+        <div>
+          <h4 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "1.05rem", fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem", letterSpacing: "0.04em" }}>
+            Rules &amp; Guidelines
+          </h4>
+          <ul className="flex flex-col gap-2">
+            {event.rules.map((rule, idx) => (
+              <li key={idx} className="flex items-start gap-2.5" style={{ fontSize: "0.82rem", color: "var(--ink-muted)", fontFamily: "var(--font-inter), sans-serif", lineHeight: 1.6 }}>
                 <span style={{ color: "var(--muted-red)", fontFamily: "var(--font-cormorant), serif", fontWeight: 600, lineHeight: 1.4 }}>✦</span>
-                {r}
+                {rule}
               </li>
             ))}
           </ul>
+        </div>
 
-          {/* Coordinators */}
-          <h4 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "1rem", fontWeight: 600, color: "var(--ink)", marginBottom: "0.75rem", letterSpacing: "0.04em" }}>Coordinators</h4>
-          <div className="flex flex-col gap-2 mb-6">
+        {/* Coordinators */}
+        <div>
+          <h4 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "1.05rem", fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem", letterSpacing: "0.04em" }}>
+            Coordinators
+          </h4>
+          <div className="flex flex-col gap-2">
             {event.coordinators.map(c => (
               <div key={c.name} className="flex items-center justify-between rounded-xl p-3" style={{ background: "rgba(255,255,255,0.6)", border: "1px solid rgba(43,43,43,0.08)" }}>
                 <span style={{ fontSize: "0.8rem", color: "var(--ink)", fontFamily: "var(--font-inter), sans-serif" }}>{c.name}</span>
@@ -201,27 +119,28 @@ function EventModal({ event, onClose }: { event: EventItem; onClose: () => void 
               </div>
             ))}
           </div>
-
-          {/* Register CTA */}
-          <a
-            href={SYMPOSIUM_CONFIG.GOOGLE_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleRegisterClick}
-            className="btn-primary w-full justify-center"
-          >
-            Register for {event.title}
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+
+      {/* CTA Button */}
+      <div className="pt-2">
+        <a
+          href={SYMPOSIUM_CONFIG.GOOGLE_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleRegisterClick}
+          className="btn-primary w-full justify-center"
+        >
+          Register for {event.title}
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </motion.article>
   );
 }
 
 export default function EventsSection() {
-  const [filter, setFilter]         = useState<Filter>("All");
-  const [selectedEvent, setSelected] = useState<EventItem | null>(null);
+  const [filter, setFilter] = useState<Filter>("All");
 
   const visible = EVENTS_DATA.filter(e => filter === "All" || e.category === filter);
 
@@ -232,7 +151,6 @@ export default function EventsSection() {
       style={{ padding: "var(--section-py) var(--section-px)", background: "var(--cream)" }}
     >
       <div className="max-w-6xl mx-auto">
-
         {/* Heading */}
         <motion.div className="text-center mb-10" {...fadeUp(0)}>
           <p style={{ fontSize: "0.68rem", letterSpacing: "0.3em", color: "var(--muted-red)", textTransform: "uppercase", fontFamily: "var(--font-inter), sans-serif", marginBottom: "0.75rem" }}>
@@ -287,10 +205,10 @@ export default function EventsSection() {
         </motion.div>
 
         {/* Cards grid */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           <AnimatePresence mode="popLayout">
-            {visible.map((e, i) => (
-              <EventCard key={e.id} event={e} onOpen={() => setSelected(e)} />
+            {visible.map((e) => (
+              <EventCard key={e.id} event={e} />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -309,13 +227,7 @@ export default function EventsSection() {
           </a>
         </motion.div>
       </div>
-
-      {/* Event detail modal */}
-      <AnimatePresence>
-        {selectedEvent && (
-          <EventModal event={selectedEvent} onClose={() => setSelected(null)} />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
+

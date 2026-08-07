@@ -7,7 +7,6 @@ export interface EventItem {
   iconName: string;
   teamSize: string;
   time: string;
-  venue: string;
   rules: string[];
   coordinators: {
     name: string;
@@ -26,7 +25,6 @@ export const EVENTS_DATA: EventItem[] = [
     iconName: "FileText",
     teamSize: "2 Members (Mandatory)",
     time: "10:30 AM - 01:00 PM",
-    venue: "Seminar Hall A, CSE Block",
     rules: [
       "Abstract submission deadline: August 18, 2026.",
       "IEEE standard format strictly enforced.",
@@ -47,7 +45,6 @@ export const EVENTS_DATA: EventItem[] = [
     iconName: "Code2",
     teamSize: "2 Members (Mandatory)",
     time: "10:30 AM - 01:00 PM",
-    venue: "Advanced Programming Lab 3",
     rules: [
       "Round 1: Preliminary bidding on buggy code snippets.",
       "Round 2: Rapid live debugging & execution challenge.",
@@ -70,7 +67,6 @@ export const EVENTS_DATA: EventItem[] = [
     iconName: "Film",
     teamSize: "2 Members (Mandatory)",
     time: "02:30 PM - 04:00 PM",
-    venue: "Campus Wide & AV Hall",
     rules: [
       "Photos must be captured within the KLNCE campus boundaries on event day.",
       "Basic color grading allowed; heavy manipulation or AI generation is prohibited.",
@@ -90,7 +86,6 @@ export const EVENTS_DATA: EventItem[] = [
     iconName: "Sparkles",
     teamSize: "2 Members (Mandatory)",
     time: "02:30 PM - 04:00 PM",
-    venue: "Main Auditorium",
     rules: [
       "Open to all registered symposium participants.",
       "Fair play and sportsmanship must be maintained throughout all fun rounds.",

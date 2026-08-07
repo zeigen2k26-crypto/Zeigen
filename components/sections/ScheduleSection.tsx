@@ -192,12 +192,8 @@ function ScheduleCard({
         {slot.title}
       </h3>
 
-      <p style={{ fontSize: "0.78rem", color: "var(--ink-muted)", lineHeight: 1.6, fontFamily: "var(--font-inter), sans-serif", marginBottom: "0.5rem" }}>
+      <p style={{ fontSize: "0.78rem", color: "var(--ink-muted)", lineHeight: 1.6, fontFamily: "var(--font-inter), sans-serif" }}>
         {slot.description}
-      </p>
-
-      <p style={{ fontSize: "0.68rem", color: "var(--ink-subtle)", fontFamily: "var(--font-inter), sans-serif", fontStyle: "italic" }}>
-        {slot.venue}
       </p>
     </div>
   );

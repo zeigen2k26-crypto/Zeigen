@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Users, Clock, MapPin, Info } from "lucide-react";
+import { ExternalLink, Users, Clock, Info } from "lucide-react";
 import { EVENTS_DATA, type EventItem } from "@/data/eventsData";
 import { SYMPOSIUM_CONFIG } from "@/constants/config";
 import { handleRegisterClick } from "@/utils/samuraiAnimation";
@@ -66,12 +66,11 @@ function EventCard({ event }: { event: EventItem }) {
         {/* Divider */}
         <div style={{ height: "1px", background: "rgba(198,166,100,0.25)", margin: "0.25rem 0" }} />
 
-        {/* Meta grid: Team size, Time, Venue */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        {/* Meta grid: Team size, Time */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {[
             { icon: Users, label: "Team Size", value: event.teamSize },
             { icon: Clock, label: "Time", value: event.time },
-            { icon: MapPin, label: "Venue", value: event.venue },
           ].map(({ icon: Icon, label, value }) => (
             <div
               key={label}

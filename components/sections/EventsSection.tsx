@@ -91,35 +91,6 @@ function EventCard({ event }: { event: EventItem }) {
           ))}
         </div>
 
-        {/* Rules */}
-        <div>
-          <h4 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "1.05rem", fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem", letterSpacing: "0.04em" }}>
-            Rules &amp; Guidelines
-          </h4>
-          <ul className="flex flex-col gap-2">
-            {event.rules.map((rule, idx) => (
-              <li key={idx} className="flex items-start gap-2.5" style={{ fontSize: "0.82rem", color: "var(--ink-muted)", fontFamily: "var(--font-inter), sans-serif", lineHeight: 1.6 }}>
-                <span style={{ color: "var(--muted-red)", fontFamily: "var(--font-cormorant), serif", fontWeight: 600, lineHeight: 1.4 }}>✦</span>
-                {rule}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Coordinators */}
-        <div>
-          <h4 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "1.05rem", fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem", letterSpacing: "0.04em" }}>
-            Coordinators
-          </h4>
-          <div className="flex flex-col gap-2">
-            {event.coordinators.map(c => (
-              <div key={c.name} className="flex items-center justify-between rounded-xl p-3" style={{ background: "rgba(255,255,255,0.6)", border: "1px solid rgba(43,43,43,0.08)" }}>
-                <span style={{ fontSize: "0.8rem", color: "var(--ink)", fontFamily: "var(--font-inter), sans-serif" }}>{c.name}</span>
-                <a href={`tel:${c.phone}`} style={{ fontSize: "0.78rem", color: "var(--muted-red)", fontFamily: "var(--font-inter), sans-serif" }}>{c.phone}</a>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* CTA Button */}

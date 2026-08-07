@@ -26,7 +26,7 @@ export const SYMPOSIUM_CONFIG = {
   },
 
   socials: {
-    instagram: "https://instagram.com/ace_klnce",
+    instagram: "https://www.instagram.com/zeigen_2k26?igsh=MW1oNHJ5cDNseWVtMQ==",
     linkedin:  "https://linkedin.com/company/ace-klnce",
     github:    "https://github.com/ace-klnce",
     youtube:   "https://youtube.com/@ace_klnce"

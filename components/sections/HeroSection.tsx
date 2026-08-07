@@ -680,7 +680,7 @@ export default function HeroSection() {
           >
             {[
               { icon: Calendar, text: SYMPOSIUM_CONFIG.date },
-              { icon: MapPin,   text: "CSE Campus, Madurai" },
+              { icon: MapPin,   text: "PG Conference Hall" },
             ].map(({ icon: Icon, text }) => (
               <div
                 key={text}
